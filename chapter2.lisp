@@ -5,19 +5,16 @@
 (+ 4 10)
 ;; ii. outermost function is passed them:
 14
-
 ; (b)
 ;; i.
 (list 1 5)
 ;; ii.
 (1 5)
-
 ; (c)
 ;; i. second element is evaluated. it returned nil:
 NIL
 ;; ii. so third element is not evaluated and the fourth element is evaluated:
 7
-
 ;(d)
 ;; i.
 (list (and nil t) (+ 1 2))
@@ -40,27 +37,27 @@ NIL
 (defun fourth (lst)
   (car (cdr (cdr (cdr lst)))))
 
-					; 4.
+; 4.
 (defun greater (a b)
   (if (> a b) a b))
 
-					; 5.
-					; (a) returns true, t, if the function has an element nil.
-					; (b)
+; 5.
+; (a) returns true, t, if the function has an element nil.
+; (b)
 
-					; 6.
-					; (a) car
-					; (b) or
-					; (c) apply
+; 6.
+; (a) car
+; (b) or
+; (c) apply
 
-					; 7.
+; 7.
 (defun nested-listp (lst)
   (if (null lst)
       nil
     (if (listp (car lst))
 	t
       (nested-listp (cdr lst)))))
-					; alternate
+; alternate
 (defun nested-listp1 (lst)
   (and (not (null lst))
        (or (listp (car lst))
