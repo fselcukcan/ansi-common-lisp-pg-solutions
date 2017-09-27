@@ -61,4 +61,4 @@ NIL
 (defun nested-listp1 (lst)
   (and (not (null lst))
        (or (listp (car lst))
-	   (nestedp (cdr lst)))))
+	   (nestedp1 (cdr lst)))))
