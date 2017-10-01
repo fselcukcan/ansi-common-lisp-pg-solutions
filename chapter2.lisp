@@ -62,16 +62,16 @@ NIL
   (if (null lst)
       nil
     (if (listp (car lst))
-	t
+        t
       (nested-listp (cdr lst)))))
 
 ; alternate
-(defun nested-listp1 (lst)
+(defun nested-listp (lst)
   (and (not (null lst))
        (or (listp (car lst))
-	   (nestedp1 (cdr lst)))))
+           (nestedp (cdr lst)))))
 
-; 8
+; 8.
 ; (a)
 ; recursive
 (defun dots (n)
@@ -82,13 +82,13 @@ NIL
       (dots (- n 1))))))
 
 ;iterative
-(defun dots1 (n)
+(defun dots (n)
   (do ((i 0 (+ i 1)))
       ((= i n))
       (format t ".")))
 
 ; alternate
-(defun dots11 (n)
+(defun dots (n)
   (do ((i n (- i 1)))
       ((= i 0))
       (format t ".")))
@@ -97,11 +97,11 @@ NIL
 
 ; (b)
 ; iterative
-(defun occurence-times-a-it (lst)
+(defun occurence-times-a (lst)
   (let ((n 0))
     (dolist (obj lst)
       (if (eql obj 'a)
-	  (setf n (+ n 1))))
+          (setf n (+ n 1))))
     n))
 ; warning (+ n 1) instead of (setf n (+ n 1)) does not work since operator + does not modify variable n, only returns a value
 
@@ -110,7 +110,7 @@ NIL
   (if (null lst)
       0
     (if (eql (car lst) 'a)
-	(+ 1 (occurence-times-a (cdr lst)))
+        (+ 1 (occurence-times-a (cdr lst)))
       (occurence-times-a (cdr lst)))))
 
 ; alternative general
@@ -118,7 +118,7 @@ NIL
   (if (null lst)
       0
     (if (eql (car lst) obj)
-	(+ 1 (occurence-times (cdr lst) obj))
+        (+ 1 (occurence-times (cdr lst) obj))
       (occurence-times (cdr lst) obj))))
 
 ;alternative general; excellent one from T.Shido's Home Page (http://www.shido.info/lisp/pacl2_e.html#hello). I have generalized it.
@@ -127,5 +127,26 @@ NIL
       (+ (if (eq (car ls) obj) 1 0) (occurence-times1 (cdr ls) obj))
     0))
 
-; 9
-; coming soon
+; 9.
+; (a)
+; Lisp's remove function is not destructive. The outcome of it should be saved as in the following correct version
+(defun summit (lst)
+  (let ((lst1 (remove nil lst)))
+    (apply '+ lst1)))
+
+; (b)
+; Wrong thing about the version it the exercise is it does not have the termination case. It means to recurse forever. (cdr lst) will be nil when the end of a list lst reached and (car lst) will be nil always.
+(defun summit (lst)
+  (if (null lst)
+      0
+    (if (null (car lst))
+	(summit (cdr lst))
+      (+ (car lst) (summit (cdr lst))))))
+
+; alternate
+(defun summit (lst)
+  (if lst
+      (+ (if (car lst) (car lst) 0) (summit1 (cdr lst)))
+    0))
+
+(summit '(1 3 4 2 6))
