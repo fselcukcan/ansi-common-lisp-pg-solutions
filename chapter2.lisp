@@ -121,15 +121,11 @@ NIL
 	(+ 1 (occurence-times (cdr lst) obj))
       (occurence-times (cdr lst) obj))))
 
-<<<<<<< HEAD
 ;alternative general; excellent one from T.Shido's Home Page (http://www.shido.info/lisp/pacl2_e.html#hello). I have generalized it.
-=======
-;alternative general; excellent one from Shido's Home Page (http://www.shido.info/lisp/pacl2_e.html#hello). I have generalized it.
->>>>>>> 964ff792d79e429e62c0f4122fd69e77f821dc3b
 (defun occurence-times1 (ls obj) 
   (if ls
       (+ (if (eq (car ls) obj) 1 0) (occurence-times1 (cdr ls) obj))
     0))
 
-					; 9
+; 9
 ; coming soon
